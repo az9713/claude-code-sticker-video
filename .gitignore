@@ -15,3 +15,6 @@ school-day-45s/renders/school-day-45s.mp4
 school-day-45s/snapshots/fix1/
 school-day-45s/snapshots/fix2/
 school-day-45s/.impeccable/hook.cache.json
+
+# Local tool state (Serena MCP)
+.serena/
