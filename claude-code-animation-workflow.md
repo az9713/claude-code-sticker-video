@@ -1,15 +1,15 @@
 ---
-title: Eric's Claude Code + HyperFrames animation workflow
+title: The host's Claude Code + HyperFrames animation workflow
 source: https://www.youtube.com/watch?v=s8WKkUuEJWs
 inputs: the video transcript and the video description (not in this repo)
 date: 2026-10-08
 ---
 
-# Eric's animation workflow (Claude Code + JavaScript + HyperFrames)
+# The host's animation workflow (Claude Code + JavaScript + HyperFrames)
 
 ## Tags
 
-- **[STATED]** — Eric says it in the video, or it is in the video description. A timestamp follows.
+- **[STATED]** — The host says it in the video, or it is in the video description. A timestamp follows.
 - **[INFERRED]** — I filled a gap. The claim is probable, but the video does not show it.
 - **[GAP]** — The video does not give this information. I did not guess.
 - **[VERIFIED]** — I confirmed it on the build machine (Windows 11) during these builds.
@@ -21,12 +21,12 @@ Each character, room, and prop has a name and values. You change the values to d
 
 This is not AI video generation. It is the method of traditional animation. You design the parts. The AI changes them 30 times a second and joins the frames into one video. [STATED 0:47–1:03]
 
-Eric gives two problems with AI video generation that this method removes [STATED 1:12–1:27]:
+The host gives two problems with AI video generation that this method removes [STATED 1:12–1:27]:
 
 1. Generation is expensive. Here, the only cost is Claude tokens, and the JavaScript is simple.
 2. Generation is not consistent. A character changes between videos. Here, the character is code, so it stays the same.
 
-**The important rule:** build each part one time, then use it again. Most demos are "one prompt in, one video out." Eric builds a library of parts. [STATED 0:15–0:31, 5:21]
+**The important rule:** build each part one time, then use it again. Most demos are "one prompt in, one video out." The host builds a library of parts. [STATED 0:15–0:31, 5:21]
 
 ### What is code and what is not [STATED, README]
 
@@ -92,12 +92,12 @@ Prompt [STATED 5:09–5:15]:
 
 Literal prompt from the video description [STATED 5:29–5:44]:
 
-> Following the style guide, build a reusable library in code. A character rig for Eric with named poses and moods. A coffee-shop set. Props: mug, phone, laptop. Every piece called by name, like eric.set pose wave, mood happy
+> Following the style guide, build a reusable library in code. A character rig for [the host] with named poses and moods. A coffee-shop set. Props: mug, phone, laptop. Every piece called by name, like [host].set pose wave, mood happy
 
 API shape from the video description [STATED]:
 
 ```js
-eric.set({pose: 'wave', mood: 'happy'})
+host.set({pose: 'wave', mood: 'happy'})
 ```
 
 - Analogy he uses: a TV show does not build a new set for each episode. You move the same assets. [STATED 5:21]
@@ -110,7 +110,7 @@ eric.set({pose: 'wave', mood: 'happy'})
 
 Literal prompt from the video description [STATED 6:06–6:14]:
 
-> 15-second scene: coffee shop, Eric on the couch holding a mug, happy. At 3 seconds, he waves. Use only the library. Render it.
+> 15-second scene: coffee shop, [the host] on the couch holding a mug, happy. At 3 seconds, he waves. Use only the library. Render it.
 
 - "Use only the library" is the key phrase. It stops Claude from drawing new parts. [STATED]
 - Result: the wave starts at 3 s, and the camera zooms in. [STATED 6:23–6:30]
@@ -183,7 +183,7 @@ Input: `stickers.png` (the user's 3×3 sticker sheet of a boy; not in this repo)
 narrator + music, the 9-scene day plan (one sticker per scene).
 Output: `school-day-45s/renders/school-day-45s-14lufs.mp4` — 1920×1080, 30 fps, 45.0 s, −13.8 LUFS, true peak −2.2 dBTP.
 
-| Eric's step | What I did | File |
+| Host's step | What I did | File |
 |---|---|---|
 | 1. Look | **Skipped.** The stickers fix the look of the boy. Sets were drawn to match them. | — |
 | 2. Style bible | Rule "the boy is only a sticker PNG, never redrawn"; bust stickers hide their flat bottom behind a prop; set palette, 6 px ink outlines, sky color per time of day | `school-day-45s/style-bible.md` |

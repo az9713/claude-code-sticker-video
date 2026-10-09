@@ -1,4 +1,4 @@
-// Reusable library (Eric's step 3) for "A School Day": sets, props, sticker boy, effects, clock badge.
+// Reusable library (the host's step 3) for "A School Day": sets, props, sticker boy, effects, clock badge.
 // Every piece is called by name, e.g. boy.pop(tl, 3) or sets.classroom(stage, { board: "SCIENCE" }).
 // Follows style-bible.md. Scenes must use only this file.
 (function () {

@@ -49,7 +49,7 @@ the narrator's voice and the music (both from ElevenLabs).
 ## 1. The brief — what was actually asked
 
 The first message was the same request without "use the same workflow as last one". The user interrupted it and
-sent it again with that phrase. The phrase points to Eric's method in `../claude-code-animation-workflow.md`: style bible →
+sent it again with that phrase. The phrase points to the host's method in `../claude-code-animation-workflow.md`: style bible →
 reusable library of named parts → a scene that uses only the library → voice, music, sound effects → render.
 This document follows that method. It does not cover the earlier 30-second video (the user's instruction).
 
@@ -73,7 +73,7 @@ draw a new code character that looks like them. That was the first question I as
 | Python libraries | Pillow, NumPy 2.2.6, SciPy 1.16.0, `faster_whisper` — all present |
 | Rhubarb lip sync | Present at `../tools/rhubarb/…`, not used (section 4) |
 | ElevenLabs | MCP connector connected. `ELEVENLABS_API_KEY` not set, so the `music` / `text-to-speech` skills cannot run; the connector does not need the key. |
-| Read first | A private resume file (not in this repo), `../claude-code-animation-workflow.md` (the method), Eric's video description (his literal prompts) |
+| Read first | A private resume file (not in this repo), `../claude-code-animation-workflow.md` (the method), the reference video's description (the host's literal prompts) |
 
 The resume file listed `stickers.png` as an unknown file that no session had opened. This session opened it.
 
@@ -241,7 +241,7 @@ files are the same on every run.
 
 ### 3.11 Write the style bible (file: `style-bible.md`)
 
-This is Eric's step 2: one page that every scene must obey. Key rules:
+This is the host's step 2: one page that every scene must obey. Key rules:
 - The boy is **only** a sticker PNG. Never redraw, recolor or crop him, never remove the white border.
 - Bust stickers hide their flat bottom behind a prop or below the frame.
 - One sticker on screen at a time, 600–720 px high; motion pivots at the bottom centre.
@@ -253,7 +253,7 @@ This is Eric's step 2: one page that every scene must obey. Key rules:
 
 ### 3.12 Build the library (file: `lib/library.js`, 421 lines)
 
-This is Eric's step 3 and the centre of the method: **build each part once, give it a name, then direct it**.
+This is the host's step 3 and the centre of the method: **build each part once, give it a name, then direct it**.
 The scene file never draws a shape itself. It only calls names.
 
 **Layers.** `stage(section)` gives each scene 4 stacked layers inside a `.cam` box (the camera):
@@ -450,9 +450,11 @@ I did not prove why try 1 overshot. The likely cause is the AAC encoder adding p
 11. **Hook warnings not acted on.** A security hook warned about `innerHTML` (all strings are fixed text in the
     library, no user input) and asked for `integrity=` on the GSAP `<script>` tag. I did not add it: the tag is the
     one `hyperframes init` writes, pinned to `gsap@3.14.2`. This is an accepted risk, not a fix.
-12. **Possible pronunciation problem.** Whisper heard "asleep beyond" for "a sleepy yawn" — on the clean voice file
-    *and* on the final mix. Whisper also mishears words under music ("his valing test", "Four o'clock, start"), so
-    this may be Whisper, not the voice. **Not resolved.** A person must listen to 38.9–42.0 s.
+12. **Pronunciation check — resolved 2026-10-09.** Whisper `base.en` heard "asleep beyond" for "a sleepy yawn" — on
+    the clean voice file *and* on the final mix. Whisper also mishears words under music ("his valing test", "Four
+    o'clock, start"). On 2026-10-09, `small.en` and `medium.en` transcribed `assets/vo-9.mp3` as "Warm milk, a sleepy
+    yawn. Goodnight, little one." (word probability 0.96–1.0 for "a", "sleepy", "yawn"). The error was the `base.en`
+    model, not the voice. Line 9 was not generated again.
 
 ---
 
@@ -474,7 +476,7 @@ I did not prove why try 1 overshot. The likely cause is the AAC encoder adding p
 | `curl` | Downloaded the voice and music MP3s from the signed URLs |
 | faster-whisper (`base.en`, CPU, int8) | Word times of the voice; vocal check of the music; timing check of the final mix |
 | ffmpeg 7.1.1 / ffprobe | `silencedetect`, cutting lines, `volumedetect`, `loudnorm`, `alimiter`, `ebur128`, frame tiling, duration checks |
-| Not used | Rhubarb Lip Sync (no lip sync with stickers); Eric's step-1 style stills (the stickers fix the look); Epidemic Sound / Pixabay (ElevenLabs + code instead) |
+| Not used | Rhubarb Lip Sync (no lip sync with stickers); the host's step-1 style stills (the stickers fix the look); Epidemic Sound / Pixabay (ElevenLabs + code instead) |
 
 ---
 
@@ -499,9 +501,9 @@ No rate limit or quota was hit. The ElevenLabs download links are signed and exp
 
 **Not done, and why:**
 - Lip sync — the stickers have a fixed mouth (the user's choice in 3.1). The video stands without it: a narrator speaks, not the boy.
-- Eric's step 1 (four style stills) — the stickers set the look.
+- The host's step 1 (four style stills) — the stickers set the look.
 - **No person has listened to the audio.** Every audio check was a machine check. Untested by ear: line 9
-  (item 12 above), the music level 0.22, and the effect levels (alarm 0.3, whooshes 0.35, strums 0.45/0.55,
+  (its words are confirmed by two larger Whisper models, item 12 above, but not its tone), the music level 0.22, and the effect levels (alarm 0.3, whooshes 0.35, strums 0.45/0.55,
   twinkle 0.4, fizz 0.45, bell 0.2).
 - The user had not reviewed the video when this was written.
 
@@ -525,8 +527,8 @@ to line 9); `../claude-code-animation-workflow.md` §7 (run log).
 - *Move a cue:* change its time in `index.html` (all times are global seconds).
 - *Change what a scene looks like:* edit that set in `lib/library.js`; both scenes that use it change.
 - *Swap a sticker:* change the name in `boy(st[i], "name", {...})`.
-- *Fix line 9:* generate only that line again (same voice, `eleven_v4`, text "Warm milk, one sleepy yawn. Goodnight,
-  little one."), save as `assets/vo-9.mp3`, set its `data-duration`.
+- *Replace one voice line:* generate only that line again (same voice, `eleven_v4`), save it as `assets/vo-N.mp3`
+  (N = line number), set its `data-duration`.
 - *After any change:*
   1. `cd school-day-45s`
   2. `npx hyperframes@0.8.143 check`

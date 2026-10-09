@@ -1,4 +1,4 @@
-# Sound effects made with code (Eric's "Claude-generated sound" option). Stdlib only.
+# Sound effects made with code (the host's "Claude-generated sound" option). Stdlib only.
 # Run: python make_sfx.py  -> writes assets/sfx-*.wav (44.1 kHz mono 16-bit).
 import math, random, struct, wave
 

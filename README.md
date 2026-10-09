@@ -19,7 +19,7 @@ The [development journey](https://az9713.github.io/claude-code-sticker-video/dev
 
 ## Reference
 
-The method comes from Eric's video **"How to animate videos using Claude Code"**:
+The method comes from the video **"How to animate videos using Claude Code"**:
 https://www.youtube.com/watch?v=s8WKkUuEJWs. Its main rule: build the characters, sets, props and sounds
 **once** as a named library, then direct each scene by calling those names ("use only the library").
 [`claude-code-animation-workflow.md`](claude-code-animation-workflow.md) is a step-by-step write-up of that
@@ -61,7 +61,7 @@ The render takes about 1 minute (1350 frames) on a laptop with an integrated GPU
 
 ## Credits
 
-- Method: Eric's video, linked above.
+- Method: the video linked above (its host's method).
 - Sticker character: supplied by the project owner. Voice and music: generated with ElevenLabs.
 - Code: written by Claude Code (Anthropic).
 

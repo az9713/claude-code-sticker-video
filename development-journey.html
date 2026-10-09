@@ -74,7 +74,7 @@ the narrator's voice and the music (both from ElevenLabs).</p>
 <hr />
 <h2 id="1-the-brief-what-was-actually-asked">1. The brief — what was actually asked</h2>
 <p>The first message was the same request without "use the same workflow as last one". The user interrupted it and
-sent it again with that phrase. The phrase points to Eric's method in <code>../claude-code-animation-workflow.md</code>: style bible →
+sent it again with that phrase. The phrase points to the host's method in <code>../claude-code-animation-workflow.md</code>: style bible →
 reusable library of named parts → a scene that uses only the library → voice, music, sound effects → render.
 This document follows that method. It does not cover the earlier 30-second video (the user's instruction).</p>
 <p><strong>"AMIAQ"</strong> I read as "ask me if any questions". So I asked before I built (section 3.1).</p>
@@ -122,7 +122,7 @@ draw a new code character that looks like them. That was the first question I as
 </tr>
 <tr>
 <td>Read first</td>
-<td>A private resume file (not in this repo), <code>../claude-code-animation-workflow.md</code> (the method), Eric's video description (his literal prompts)</td>
+<td>A private resume file (not in this repo), <code>../claude-code-animation-workflow.md</code> (the method), the reference video's description (the host's literal prompts)</td>
 </tr>
 </tbody>
 </table>
@@ -321,7 +321,7 @@ files are the same on every run.</p>
 </tbody>
 </table>
 <h3 id="311-write-the-style-bible-file-style-biblemd">3.11 Write the style bible (file: <code>style-bible.md</code>)</h3>
-<p>This is Eric's step 2: one page that every scene must obey. Key rules:
+<p>This is the host's step 2: one page that every scene must obey. Key rules:
 - The boy is <strong>only</strong> a sticker PNG. Never redraw, recolor or crop him, never remove the white border.
 - Bust stickers hide their flat bottom behind a prop or below the frame.
 - One sticker on screen at a time, 600–720 px high; motion pivots at the bottom centre.
@@ -331,7 +331,7 @@ files are the same on every run.</p>
 - 6 px outlines, round joins, flat fills, no gradients, no blur, no shadows.
 - Cuts hide behind a full-frame colour wipe (0.25 s in, 0.3 s out) with a whoosh.</p>
 <h3 id="312-build-the-library-file-liblibraryjs-421-lines">3.12 Build the library (file: <code>lib/library.js</code>, 421 lines)</h3>
-<p>This is Eric's step 3 and the centre of the method: <strong>build each part once, give it a name, then direct it</strong>.
+<p>This is the host's step 3 and the centre of the method: <strong>build each part once, give it a name, then direct it</strong>.
 The scene file never draws a shape itself. It only calls names.</p>
 <p><strong>Layers.</strong> <code>stage(section)</code> gives each scene 4 stacked layers inside a <code>.cam</code> box (the camera):</p>
 <pre><code>.cam (scales 1.00 → 1.06 for a slow push-in)
@@ -669,9 +669,11 @@ there, and added the run log (now §7) to <code>../claude-code-animation-workflo
 <li><strong>Hook warnings not acted on.</strong> A security hook warned about <code>innerHTML</code> (all strings are fixed text in the
     library, no user input) and asked for <code>integrity=</code> on the GSAP <code>&lt;script&gt;</code> tag. I did not add it: the tag is the
     one <code>hyperframes init</code> writes, pinned to <code>gsap@3.14.2</code>. This is an accepted risk, not a fix.</li>
-<li><strong>Possible pronunciation problem.</strong> Whisper heard "asleep beyond" for "a sleepy yawn" — on the clean voice file
-    <em>and</em> on the final mix. Whisper also mishears words under music ("his valing test", "Four o'clock, start"), so
-    this may be Whisper, not the voice. <strong>Not resolved.</strong> A person must listen to 38.9–42.0 s.</li>
+<li><strong>Pronunciation check — resolved 2026-10-09.</strong> Whisper <code>base.en</code> heard "asleep beyond" for "a sleepy yawn" — on
+    the clean voice file <em>and</em> on the final mix. Whisper also mishears words under music ("his valing test", "Four
+    o'clock, start"). On 2026-10-09, <code>small.en</code> and <code>medium.en</code> transcribed <code>assets/vo-9.mp3</code> as "Warm milk, a sleepy
+    yawn. Goodnight, little one." (word probability 0.96–1.0 for "a", "sleepy", "yawn"). The error was the <code>base.en</code>
+    model, not the voice. Line 9 was not generated again.</li>
 </ol>
 <hr />
 <h2 id="6-tools-used-what-each-one-did-in-this-session">6. Tools used — what each one did in this session</h2>
@@ -741,7 +743,7 @@ there, and added the run log (now §7) to <code>../claude-code-animation-workflo
 </tr>
 <tr>
 <td>Not used</td>
-<td>Rhubarb Lip Sync (no lip sync with stickers); Eric's step-1 style stills (the stickers fix the look); Epidemic Sound / Pixabay (ElevenLabs + code instead)</td>
+<td>Rhubarb Lip Sync (no lip sync with stickers); the host's step-1 style stills (the stickers fix the look); Epidemic Sound / Pixabay (ElevenLabs + code instead)</td>
 </tr>
 </tbody>
 </table>
@@ -784,9 +786,9 @@ there, and added the run log (now §7) to <code>../claude-code-animation-workflo
 <p><strong>Done.</strong> <code>renders/school-day-45s-14lufs.mp4</code> (deliverable) and <code>renders/school-day-45s.mp4</code> (raw render, −19.3 LUFS; not in the repo, a render rebuilds it).</p>
 <p><strong>Not done, and why:</strong>
 - Lip sync — the stickers have a fixed mouth (the user's choice in 3.1). The video stands without it: a narrator speaks, not the boy.
-- Eric's step 1 (four style stills) — the stickers set the look.
+- The host's step 1 (four style stills) — the stickers set the look.
 - <strong>No person has listened to the audio.</strong> Every audio check was a machine check. Untested by ear: line 9
-  (item 12 above), the music level 0.22, and the effect levels (alarm 0.3, whooshes 0.35, strums 0.45/0.55,
+  (its words are confirmed by two larger Whisper models, item 12 above, but not its tone), the music level 0.22, and the effect levels (alarm 0.3, whooshes 0.35, strums 0.45/0.55,
   twinkle 0.4, fizz 0.45, bell 0.2).
 - The user had not reviewed the video when this was written.</p>
 <p><strong>Files in the project:</strong></p>
@@ -838,8 +840,8 @@ to line 9); <code>../claude-code-animation-workflow.md</code> §7 (run log).</p>
 - <em>Move a cue:</em> change its time in <code>index.html</code> (all times are global seconds).
 - <em>Change what a scene looks like:</em> edit that set in <code>lib/library.js</code>; both scenes that use it change.
 - <em>Swap a sticker:</em> change the name in <code>boy(st[i], "name", {...})</code>.
-- <em>Fix line 9:</em> generate only that line again (same voice, <code>eleven_v4</code>, text "Warm milk, one sleepy yawn. Goodnight,
-  little one."), save as <code>assets/vo-9.mp3</code>, set its <code>data-duration</code>.
+- <em>Replace one voice line:</em> generate only that line again (same voice, <code>eleven_v4</code>), save it as <code>assets/vo-N.mp3</code>
+  (N = line number), set its <code>data-duration</code>.
 - <em>After any change:</em>
   1. <code>cd school-day-45s</code>
   2. <code>npx hyperframes@0.8.143 check</code>
