@@ -1,0 +1,17 @@
+# Requested
+# the first test video folder
+*-30s/
+transcript.txt
+stickers.png
+README.txt
+
+# Third-party tools, private notes, scratch
+tools/
+HANDOFF.md
+.ignore/
+
+# Work files (a render or snapshot rebuilds them)
+school-day-45s/renders/school-day-45s.mp4
+school-day-45s/snapshots/fix1/
+school-day-45s/snapshots/fix2/
+school-day-45s/.impeccable/hook.cache.json

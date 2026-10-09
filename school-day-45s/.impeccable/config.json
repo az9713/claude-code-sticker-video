@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-09T05:29:22.612Z",
+        "reason": "Claude: body background #fff8ec is the style-bible 'paper' token and is never visible; every scene paints a full-frame wall or sky over it"
+      }
+    ]
+  }
+}

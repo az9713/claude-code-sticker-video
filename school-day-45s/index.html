@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="lib/library.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #fff8ec; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .cam { position: absolute; inset: 0; transform-origin: 50% 55%; }
+      .layer { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+      .boy { position: absolute; display: block; transform-origin: 50% 100%; }
+      .boy img { display: block; width: 100%; height: 100%; transform-origin: 50% 100%; }
+      .dim { position: absolute; inset: 0; z-index: 2; background: #0d1330; opacity: 0; }
+      #s8 .title-card { z-index: 3; }
+      .wipe { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; display: block;
+        border-left: 10px solid #2b2420; border-right: 10px solid #2b2420; }
+      #overlay { z-index: 5; }
+      #fade { position: absolute; inset: 0; background: #000; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="45" data-width="1920" data-height="1080">
+      <section id="s0" class="clip" data-start="0" data-duration="4.8" data-track-index="0"></section>
+      <section id="s1" class="clip" data-start="4.8" data-duration="4.8" data-track-index="0"></section>
+      <section id="s2" class="clip" data-start="9.6" data-duration="4.8" data-track-index="0"></section>
+      <section id="s3" class="clip" data-start="14.4" data-duration="4.8" data-track-index="0"></section>
+      <section id="s4" class="clip" data-start="19.2" data-duration="4.8" data-track-index="0"></section>
+      <section id="s5" class="clip" data-start="24" data-duration="4.8" data-track-index="0"></section>
+      <section id="s6" class="clip" data-start="28.8" data-duration="4.8" data-track-index="0"></section>
+      <section id="s7" class="clip" data-start="33.6" data-duration="4.8" data-track-index="0"></section>
+      <section id="s8" class="clip" data-start="38.4" data-duration="6.6" data-track-index="0">
+        <div class="dim"></div>
+        <div class="title-card"><div>Goodnight!</div></div>
+      </section>
+      <section id="overlay" class="clip" data-start="0" data-duration="45" data-track-index="1">
+        <div id="badge-slot"></div>
+        <div id="wipes"></div>
+        <div id="fade"></div>
+      </section>
+
+      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="45" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo-1" src="assets/vo-1.mp3" data-start="0.6" data-duration="3.79" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-2" src="assets/vo-2.mp3" data-start="5.3" data-duration="3.29" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-3" src="assets/vo-3.mp3" data-start="10.1" data-duration="3.92" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-4" src="assets/vo-4.mp3" data-start="14.9" data-duration="3.45" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-5" src="assets/vo-5.mp3" data-start="19.7" data-duration="2.77" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-6" src="assets/vo-6.mp3" data-start="24.5" data-duration="3.47" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-7" src="assets/vo-7.mp3" data-start="29.3" data-duration="2.8" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-8" src="assets/vo-8.mp3" data-start="34.1" data-duration="2.72" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-9" src="assets/vo-9.mp3" data-start="38.9" data-duration="3.06" data-track-index="11" data-volume="1"></audio>
+
+      <audio id="sfx-alarm" src="assets/sfx-alarm.wav" data-start="0.05" data-duration="1.32" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="sfx-whoosh-1" src="assets/sfx-whoosh.wav" data-start="4.55" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-2" src="assets/sfx-whoosh.wav" data-start="9.35" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-3" src="assets/sfx-whoosh.wav" data-start="14.15" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-4" src="assets/sfx-whoosh.wav" data-start="18.95" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-5" src="assets/sfx-whoosh.wav" data-start="23.75" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-6" src="assets/sfx-whoosh.wav" data-start="28.55" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-7" src="assets/sfx-whoosh.wav" data-start="33.35" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-8" src="assets/sfx-whoosh.wav" data-start="38.15" data-duration="0.45" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-pop-1" src="assets/sfx-pop.wav" data-start="4.95" data-duration="0.12" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-pop-2" src="assets/sfx-pop.wav" data-start="9.75" data-duration="0.12" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-fizz" src="assets/sfx-fizz.wav" data-start="12.45" data-duration="1.2" data-track-index="15" data-volume="0.45"></audio>
+      <audio id="sfx-bell" src="assets/sfx-bell.wav" data-start="14.45" data-duration="1.3" data-track-index="15" data-volume="0.2"></audio>
+      <audio id="sfx-boing" src="assets/sfx-boing.wav" data-start="17.25" data-duration="0.5" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-pop-3" src="assets/sfx-pop.wav" data-start="19.35" data-duration="0.12" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-pop-4" src="assets/sfx-pop.wav" data-start="25.6" data-duration="0.12" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-sparkle-1" src="assets/sfx-sparkle.wav" data-start="27.0" data-duration="1.2" data-track-index="15" data-volume="0.4"></audio>
+      <audio id="sfx-strum-1" src="assets/sfx-strum.wav" data-start="29.9" data-duration="1.8" data-track-index="15" data-volume="0.45"></audio>
+      <audio id="sfx-strum-2" src="assets/sfx-strum.wav" data-start="31.5" data-duration="1.8" data-track-index="16" data-volume="0.55"></audio>
+      <audio id="sfx-pop-5" src="assets/sfx-pop.wav" data-start="36.1" data-duration="0.12" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-sparkle-2" src="assets/sfx-sparkle.wav" data-start="36.3" data-duration="1.2" data-track-index="15" data-volume="0.25"></audio>
+      <audio id="sfx-twinkle" src="assets/sfx-twinkle.wav" data-start="41.3" data-duration="3.7" data-track-index="15" data-volume="0.4"></audio>
+    </div>
+
+    <script>
+      // Scene: uses only lib/library.js. Times are global seconds. Scene i starts at 4.8 * i;
+      // narrator line i starts 0.5 s after its scene (line 1 at 0.6 s). Word times: words.txt (faster-whisper).
+      const { STYLE: C, stage, sets, prop, fx, word, boy, UI } = window.Library;
+      const css = document.createElement("style");
+      css.textContent = UI.css;
+      document.head.appendChild(css);
+
+      const tl = gsap.timeline({ paused: true });
+      const SCENE = [0, 4.8, 9.6, 14.4, 19.2, 24, 28.8, 33.6, 38.4];
+      const st = SCENE.map((_, i) => stage(document.getElementById("s" + i)));
+      // Slow push-in on every scene
+      st.forEach((s, i) => tl.fromTo(s.cam, { scale: 1 }, { scale: 1.06, duration: i === 8 ? 6.6 : 4.8, ease: "none" }, SCENE[i]));
+
+      // Floaters: rise and fade from where they were placed
+      const float = (els, at, { dy = -260, spread = 300, gap = 0.12, dur = 1.4 } = {}) =>
+        els.forEach((el, k) => {
+          const dx = ((k * 137) % spread) - spread / 2;
+          tl.fromTo(el, { x: 0, y: 0, scale: 0, opacity: 1 }, { x: dx, y: dy - (k % 3) * 40, scale: 1, duration: dur * 0.5, ease: "power2.out" }, at + k * gap)
+            .to(el, { y: dy - 120 - (k % 3) * 40, opacity: 0, duration: dur * 0.5, ease: "power1.in" }, at + k * gap + dur * 0.5);
+        });
+      const popIn = (el, at) => tl.fromTo(el, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.4)" }, at);
+
+      // 0 — 7:00 wake up (grumpy)
+      {
+        const r = sets.bedroom(st[0], { sky: "dawn" });
+        const b = boy(st[0], "grumpy", { x: 760, bottom: 980, h: 600 });
+        tl.fromTo(r.sun, { y: 60 }, { y: -40, duration: 4.6, ease: "power1.out" }, 0);
+        tl.fromTo(r.alarm, { rotation: -7 }, { rotation: 7, transformOrigin: "50% 100%", duration: 0.07, yoyo: true, repeat: 17, ease: "none" }, 0.05)
+          .to(r.alarm, { rotation: 0, duration: 0.1 }, 1.32);
+        b.squash(tl, 2.7).wiggle(tl, 3.3, 4, 3);
+      }
+      // 1 — 7:45 off to school (peace)
+      {
+        const r = sets.street(st[1]);
+        const b = boy(st[1], "peace", { x: 640, bottom: 1110, h: 720 });
+        b.pop(tl, 4.95);
+        tl.fromTo(r.bus, { x: -800 }, { x: 2300, duration: 3.6, ease: "none" }, 5.3);
+        b.hop(tl, 7.3, 40, 2);
+      }
+      // 2 — 9:00 science class (surprised)
+      {
+        const r = sets.classroom(st[2], { board: "SCIENCE", desk: true });
+        const b = boy(st[2], "surprised", { x: 700, bottom: 1000, h: 650 });
+        b.pop(tl, 9.75);
+        tl.to(r.volcano, { scaleX: 1.06, scaleY: 0.94, transformOrigin: "50% 100%", duration: 0.08, yoyo: true, repeat: 5 }, 12.0);
+        tl.fromTo(r.lavaDrip, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 12.55);
+        const lava = fx(st[2], "lava", 1400, 600, 14, 3);
+        lava.forEach((el, k) => {
+          const dx = ((k * 53) % 300) - 150, h = 180 + ((k * 71) % 160);
+          tl.fromTo(el, { x: 0, y: 0, scale: 0.3, opacity: 1 }, { x: dx, y: -h, scale: 1, duration: 0.5, ease: "power2.out" }, 12.5 + k * 0.04)
+            .to(el, { x: dx * 1.5, y: 120, opacity: 0, duration: 0.6, ease: "power2.in" }, 13.0 + k * 0.04);
+        });
+        b.hop(tl, 13.5, 45, 1).wiggle(tl, 13.85, 4, 2);
+        popIn(word(st[2], "WHOA!", 1220, 330, C.yellow, 80), 13.5);
+      }
+      // 3 — 10:30 recess (laugh)
+      {
+        const r = sets.playground(st[3]);
+        const b = boy(st[3], "laugh", { x: 860, bottom: 1020, h: 660 });
+        b.pop(tl, 14.55);
+        tl.to(r.ball, { y: -160, duration: 0.3, ease: "power2.out", yoyo: true, repeat: 7 }, 15.0);
+        popIn(word(st[3], "HA HA!", 1330, 330, C.yellow, 80), 17.2);
+        popIn(word(st[3], "HA!", 440, 240, C.pink, 64), 17.45);
+        b.hop(tl, 17.2, 30, 3);
+      }
+      // 4 — 12:00 lunch (pizza)
+      {
+        const r = sets.cafeteria(st[4]);
+        const b = boy(st[4], "pizza", { x: 800, bottom: 1000, h: 660 });
+        tl.fromTo(r.banner, { y: -340 }, { y: 0, duration: 0.6, ease: "bounce.out" }, 19.35);
+        b.pop(tl, 19.5).hop(tl, 20.85, 40, 1);
+        float(fx(st[4], "star", 800, 420, 6, 5), 20.9, { spread: 700, dy: -200 });
+      }
+      // 5 — 2:00 spelling test (thumbs)
+      {
+        sets.classroom(st[5], { board: "SPELLING TEST", desk: false });
+        const b = boy(st[5], "thumbs", { x: 700, bottom: 1030, h: 690 });
+        b.pop(tl, 24.15);
+        const pp = prop(st[5], "testPaper", 1380, 600, 8);
+        tl.fromTo(pp, { x: 900, rotation: 40 }, { x: 0, rotation: 0, duration: 0.6, ease: "back.out(1.4)" }, 25.6);
+        tl.to(pp, { scale: 1.15, duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out" }, 27.0);
+        float(fx(st[5], "star", 1500, 400, 8, 9), 27.05, { spread: 600, dy: -220 });
+        b.hop(tl, 27.1, 70, 2);
+      }
+      // 6 — 4:00 guitar practice (guitar)
+      {
+        const r = sets.musicRoom(st[6]);
+        const b = boy(st[6], "guitar", { x: 860, bottom: 1030, h: 720 });
+        b.pop(tl, 28.95);
+        float(fx(st[6], "note", 1100, 500, 5, 11), 29.9, { spread: 500, dy: -240 });
+        b.sway(tl, 29.9, 1.6, 4);
+        tl.to(r.amp, { scale: 1.08, transformOrigin: "50% 100%", duration: 0.1, yoyo: true, repeat: 5 }, 31.5);
+        float(fx(st[6], "note", 1100, 500, 6, 12), 31.5, { spread: 700, dy: -260 });
+        b.hop(tl, 31.55, 50, 2);
+      }
+      // 7 — 6:30 dinner (hearts)
+      {
+        const r = sets.dining(st[7]);
+        const b = boy(st[7], "hearts", { x: 800, bottom: 1000, h: 660 });
+        b.pop(tl, 33.75);
+        popIn(r.cake, 36.1);
+        float(fx(st[7], "heart", 800, 420, 7, 7), 36.3, { spread: 760, dy: -220 });
+        b.wiggle(tl, 36.3, 4, 3);
+      }
+      // 8 — 8:30 bedtime (sleepy)
+      {
+        const r = sets.bedroom(st[8], { sky: "night" });
+        const b = boy(st[8], "sleepy", { x: 760, bottom: 905, h: 600 });
+        b.pop(tl, 38.55).sway(tl, 39.2, 4.8, 2);
+        float(fx(st[8], "zzz", 1060, 330, 3, 2), 40.0, { spread: 300, dy: -180, gap: 0.4, dur: 1.6 });
+        ["tw0", "tw1", "tw2", "tw3"].forEach((n, k) =>
+          tl.to(r[n], { scale: 1.4, transformOrigin: "50% 50%", duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut" }, 38.6 + k * 0.3));
+        tl.to(st[8].section.querySelector(".dim"), { opacity: 0.6, duration: 0.9, ease: "power1.inOut" }, 41.9);
+        tl.fromTo(st[8].section.querySelector(".title-card div"), { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 42.5);
+      }
+
+      // Overlay: clock badge, color wipes at each cut, fade out
+      const badge = UI.clockBadge(document.getElementById("badge-slot"), [
+        { time: "7:00 AM", label: "Wake up", minutes: 420 },
+        { time: "7:45 AM", label: "Off to school", minutes: 465 },
+        { time: "9:00 AM", label: "Science class", minutes: 540 },
+        { time: "10:30 AM", label: "Recess", minutes: 630 },
+        { time: "12:00 PM", label: "Lunch", minutes: 720 },
+        { time: "2:00 PM", label: "Spelling test", minutes: 840 },
+        { time: "4:00 PM", label: "Guitar practice", minutes: 960 },
+        { time: "6:30 PM", label: "Dinner", minutes: 1110 },
+        { time: "8:30 PM", label: "Bedtime", minutes: 1230 },
+      ]);
+      badge.start(tl, 0.2);
+      const wipeColors = [C.yellow, C.teal, C.pink, C.orange, C.purple, C.red, C.teal, C.skyNight];
+      const wipes = document.getElementById("wipes");
+      SCENE.slice(1).forEach((t, i) => {
+        const w = document.createElement("div");
+        w.className = "wipe";
+        w.style.background = wipeColors[i];
+        wipes.appendChild(w);
+        tl.fromTo(w, { x: -2000 }, { x: 0, duration: 0.25, ease: "power2.in" }, t - 0.25)
+          .to(w, { x: 2000, duration: 0.3, ease: "power2.out" }, t);
+        badge.go(tl, t, i + 1);
+      });
+      tl.fromTo("#fade", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power1.in" }, 44.2);
+
+      // Music: bed under the narrator; the track itself fades out near 40 s.
+      tl.fromTo("#bgm", { volume: 0 }, { volume: 0.22, duration: 0.6 }, 0)
+        .to("#bgm", { volume: 0.3, duration: 0.6 }, 42.0);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

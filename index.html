@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>A School Day — sticker video</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --text:#e2e8f0; --text2:#cbd5e1; --muted:#94a3b8;
+          --orange:#fb923c; --teal:#2dd4bf; --border:#334155; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text2); font:17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width:1040px; margin:0 auto; padding:28px 16px 64px; }
+  h1 { color:var(--text); margin:0 0 6px; font-size:2rem; }
+  p.lead { color:var(--muted); margin:0 0 18px; }
+  video { width:100%; aspect-ratio:16/9; background:#000; border-radius:10px; border:1px solid var(--border); display:block; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-top:20px; }
+  .card h2 { color:var(--orange); font-size:1.15rem; margin:0 0 8px; }
+  a { color:var(--teal); }
+  .links a { display:inline-block; margin:6px 18px 0 0; font-weight:600; }
+  ul { margin:6px 0 0; padding-left:20px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>A School Day</h1>
+  <p class="lead">A 45-second video of a boy's school day, 7:00 AM to 8:30 PM. Every room, prop, motion and sound effect is code. The boy is 9 stickers.</p>
+  <video controls preload="metadata" playsinline
+         poster="school-day-45s/snapshots/frame-01-at-7.5s.png"
+         src="school-day-45s/renders/school-day-45s-14lufs.mp4"></video>
+  <div class="card links">
+    <a href="development-journey.html">Read the development journey →</a>
+    <a href="https://github.com/az9713/claude-code-sticker-video">Source on GitHub</a>
+    <a href="https://www.youtube.com/watch?v=s8WKkUuEJWs">Reference: Eric's Claude Code animation video</a>
+  </div>
+  <div class="card">
+    <h2>How it was made</h2>
+    <ul>
+      <li>Claude Code wrote a web page: SVG rooms, the 9 sticker cut-outs, and one GSAP timeline of 45 seconds.</li>
+      <li>HyperFrames opened the page in headless Chrome and captured 1350 frames (30 per second); FFmpeg encoded them.</li>
+      <li>Narrator and music: ElevenLabs. Sound effects: a Python script with the standard library only.</li>
+      <li>1920×1080, 30 fps, 45.0 s, −13.8 LUFS. Render time: 1 min 7 s.</li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>
